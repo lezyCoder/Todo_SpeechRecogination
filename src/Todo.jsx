@@ -22,6 +22,8 @@ const Todo = () => {
         }
     }, [todos]); // Runs every time todos changes
 
+    
+    // Creating the task 
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -40,6 +42,7 @@ const Todo = () => {
         setTodo("");
     }
 
+    // Deleting the task 
     const handleDelete = (indexToDelete) => {
         const filteredTodos = todos.filter((task, index) => index !== indexToDelete);
         setTodos(filteredTodos);
@@ -50,30 +53,78 @@ const Todo = () => {
         }
     }
 
+    // Updating the task 
     const handleEdit = (indexToEdit) => {
         const taskToEdit = todos[indexToEdit]; // also can be done using array find method 
         // const taskToEdit = todos.find((task, index) => index == indexToEdit)
         setTodo(taskToEdit);
         setEditingIndex(indexToEdit);
     }
+
+    //  Speech handling (Speech to text )
+    const handleSpeech = () => {
+        const SpeechRecognition =  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (!SpeechRecognition) {
+            alert("Speech Recognition is not supported in your browser.");
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.start();
+
+        recognition.onresult = (event) => {
+            const spokenText = event.results[0][0].transcript;
+            setTodo(spokenText); // Fill the input with spoken text
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech recognition error:", event.error);
+        };
+    };
+
+
+
     return (
-        <div className="todo-Container w-1/2 flex flex-col px-4 justify-center overflow-auto" >
-            <form onSubmit={handleSubmit} className='w-full p-2 relative flex gap-4'>
-                <input
-                    type="text"
-                    placeholder='Enter task'
-                    value={todo}
-                    onChange={(e) => setTodo(e.target.value)}
-                    className='border border-white rounded  text-white p-2 w-2/3 outline-none'
-                />
-                <div className='btns flex gap-3'>
-                    <button type="submit" className='outline-none  cursor-pointer rounded p-2 w-20 ml-4 bg-green-800 hover:scale-[0.9] ease-in-out'>
-                        {editingIndex !== null ? "Update " : "Add Task"}
+        <div className="todo-Container w-1/2 flex flex-col px-4 border  justify-center overflow-auto" >
+            <form onSubmit={handleSubmit} className="w-full p-2 flex gap-4 relative">
+
+                <div className="relative w-2/3">
+                    <input
+                        type="text"
+                        placeholder="Enter task"
+                        value={todo}
+                        onChange={(e) => setTodo(e.target.value)}
+                        className="border border-white rounded text-white p-2 w-full pr-12 outline-none"
+                    />
+
+                    {/* Mic button inside input */}
+                    <button
+                        type="button"
+                        onClick={handleSpeech}
+                        className="absolute right-0 top-0 h-full px-3 flex items-center justify-center 
+                 border-l border-white bg-transparent cursor-pointer"
+                    >
+                        <FaMicrophone className="text-zinc-100 opacity-80" />
+                    </button>
+                </div>
+
+                <div className="btns flex gap-3">
+                    <button
+                        type="submit"
+                        className="outline-none cursor-pointer rounded p-2 w-20 ml-4 bg-green-800 
+                 hover:scale-[0.9] ease-in-out"
+                    >
+                        {editingIndex !== null ? "Update" : "Add Task"}
                     </button>
 
                     <button
                         type="button"
-                        className=' outline-none rounded bg-red-800 p-2 w-20 hover:scale-[0.9] ease-in-out cursor-pointer'
+                        className="outline-none rounded bg-red-800 p-2 w-20 hover:scale-[0.9] ease-in-out cursor-pointer"
                         onClick={() => {
                             setTodo("");
                             setEditingIndex(null);
@@ -82,13 +133,8 @@ const Todo = () => {
                         Cancel
                     </button>
                 </div>
-
-
-
-                <button type="submit" className='p-2 ml-4 absolute left-84 top-3 opacity-35 '>
-                    <FaMicrophone className='font-semibold text-lg text-zinc-100' />
-                </button>
             </form>
+
             <ul className='w-full  p-2 '  >
                 {todos.length === 0 ? (
                     <p className='text-white text-center'>No tasks yet. Add one !</p>
