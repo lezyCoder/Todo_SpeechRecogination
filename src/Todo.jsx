@@ -57,7 +57,7 @@ const Todo = () => {
         setEditingIndex(indexToEdit);
     }
     return (
-        <div className="todo-Container w-1/2 flex flex-col px-4 pt-10 justify-center overflow-auto" >
+        <div className="todo-Container w-1/2 flex flex-col px-4 justify-center overflow-auto" >
             <form onSubmit={handleSubmit} className='w-full p-2 relative flex gap-4'>
                 <input
                     type="text"
