@@ -1,16 +1,35 @@
-# React + Vite
+# React Todo App with CRUD Operations & Speech-to-Text Input
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a clean and interactive **Todo Application** built using **React** and **Tailwind CSS**, showcasing essential React concepts along with a modern, responsive UI. The app includes full **CRUD operations**, allowing users to create, read, update, and delete todos with ease.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔹 CRUD Functionality
+- **Add Todos** – Users can enter tasks manually or using voice input.
+- **Edit Todos** – Inline editing with instant updates.
+- **Delete Todos** – Remove unwanted tasks in a single click.
+- **Mark as Complete** – Track task progress visually.
 
-## React Compiler
+### 🔹 Speech-to-Text Integration
+A key highlight of this project is the integration of **Speech-to-Text** using the browser’s native **Web Speech API**.  
+- Users can click the microphone button.
+- Speak their todo.
+- The speech is automatically converted into text and saved as a new task.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This improves accessibility and offers a hands-free task creation experience.
 
-## Expanding the ESLint configuration
+## Technology Stack
+- **React** – Component-based UI and state management using hooks like `useState`.
+- **Tailwind CSS** – Lightweight and responsive styling using utility-first classes.
+- **Web Speech API** – Converts spoken words into text.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Why This Project?
+This Todo App is perfect for learning and demonstrating:
+- React fundamentals (state, events, components)
+- Real-time UI updates
+- Tailwind-based responsive UI design
+- Integration of browser APIs within React
+- Enhancing simple applications with modern features
+
+The result is an intuitive, fast, and accessible Todo manager suitable for beginners and intermediate React learners.
+
