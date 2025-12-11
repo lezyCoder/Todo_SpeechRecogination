@@ -67,13 +67,13 @@ const Todo = () => {
                     className='border border-white rounded  text-white p-2 w-2/3 outline-none'
                 />
                 <div className='btns flex gap-3'>
-                    <button type="submit" className='outline-none  cursor-pointer rounded p-1 ml-4 bg-green-800 hover:scale-[0.9] ease-in-out'>
+                    <button type="submit" className='outline-none  cursor-pointer rounded p-2 w-20 ml-4 bg-green-800 hover:scale-[0.9] ease-in-out'>
                         {editingIndex !== null ? "Update " : "Add Task"}
                     </button>
 
                     <button
                         type="button"
-                        className=' outline-none rounded bg-red-800 p-2 ml-2 hover:scale-[0.9] ease-in-out cursor-pointer'
+                        className=' outline-none rounded bg-red-800 p-2 w-20 hover:scale-[0.9] ease-in-out cursor-pointer'
                         onClick={() => {
                             setTodo("");
                             setEditingIndex(null);

@@ -22,9 +22,9 @@ const Timer = () => {
                 {timer}
             </div>
 
-            <div className="btn flex gap-2 p-10">
-                <button className="border" onClick={handleStart}>Start</button>
-                <button className="border" onClick={handlePause}>Pause</button>
+            <div className="btn flex gap-4 p-10">
+                <button className="outline-none  p-2 w-20 rounded bg-green-800 hover:scale-[0.9]  ease-in-out cursor-pointer" onClick={handleStart}>Start</button>
+                <button className=" outline-none p-2 w-20 rounded bg-red-800 hover:scale-[0.9]  ease-in-out cursor-pointer" onClick={handlePause}>Pause</button>
             </div>
         </div>
     );
