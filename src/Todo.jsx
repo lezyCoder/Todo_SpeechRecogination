@@ -90,7 +90,7 @@ const Todo = () => {
 
 
     return (
-        <div className="todo-Container w-1/2 flex flex-col px-4 border  justify-center overflow-auto" >
+        <div className="todo-Container w-1/2 flex flex-col px-4 justify-center overflow-auto" >
             <form onSubmit={handleSubmit} className="w-full p-2 flex gap-4 relative">
 
                 <div className="relative w-2/3">

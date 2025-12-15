@@ -17,7 +17,7 @@ const Timer = () => {
     };
 
     return (
-        <div className="w-1/2 h-full flex justify-center items-center flex-col border">
+        <div className="w-1/2 h-full flex justify-center items-center flex-col ">
             <div className="timer p-10 text-9xl">
                 {timer}
             </div>
