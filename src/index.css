@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.completed {
+  text-decoration: line-through;
+}

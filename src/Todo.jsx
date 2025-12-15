@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { FaMicrophone } from "react-icons/fa";
+import DriverConfigue from './DriverConfigue.jsx'
 
 const Todo = () => {
 
     const [todo, setTodo] = useState("");
     const [todos, setTodos] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
+    const [isMarked, setMarked] = useState(false);
 
     // Load todos from localStorage when component mounts
     useEffect(() => {
@@ -13,6 +15,9 @@ const Todo = () => {
         if (savedTodos) {
             setTodos(JSON.parse(savedTodos)); // Convert string back to array
         }
+
+        // Driver Js - started on the load
+        DriverConfigue.drive();
     }, []); // Empty array = runs once on mount
 
     // Save todos to localStorage whenever todos changes
@@ -22,7 +27,7 @@ const Todo = () => {
         }
     }, [todos]); // Runs every time todos changes
 
-    
+
     // Creating the task 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -61,10 +66,15 @@ const Todo = () => {
         setEditingIndex(indexToEdit);
     }
 
+    // Handling the updated task
+    const handleCompletedTask = (e) => {
+        const todoItem = e.target.closest(".todo-item");
+        if (!todoItem) return;
+        todoItem.classList.toggle("completed", e.target.checked);
+    }
     //  Speech handling (Speech to text )
     const handleSpeech = () => {
-        const SpeechRecognition =  window.SpeechRecognition || window.webkitSpeechRecognition;
-
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
             alert("Speech Recognition is not supported in your browser.");
             return;
@@ -87,8 +97,6 @@ const Todo = () => {
         };
     };
 
-
-
     return (
         <div className="todo-Container w-1/2 flex flex-col px-4 justify-center overflow-auto" >
             <form onSubmit={handleSubmit} className="w-full p-2 flex gap-4 relative">
@@ -106,7 +114,7 @@ const Todo = () => {
                     <button
                         type="button"
                         onClick={handleSpeech}
-                        className="absolute right-0 top-0 h-full px-3 flex items-center justify-center 
+                        className="mic-button absolute right-0 top-0 h-full px-3 flex items-center justify-center 
                  border-l border-white bg-transparent cursor-pointer"
                     >
                         <FaMicrophone className="text-zinc-100 opacity-80" />
@@ -136,17 +144,16 @@ const Todo = () => {
             </form>
 
             <ul className='w-full  p-2 '  >
-                {todos.length === 0 ? (
-                    <p className='text-white text-center'>No tasks yet. Add one !</p>
-                ) : (
+                {
                     todos.map((task, index) => (
                         <div
-                            className={`flex justify-between items-center p-4 mb-2 ${editingIndex === index ? 'bg-blue-900' : 'bg-gray-800'
+                            className={`todo-item flex justify-between items-center p-4 mb-2 ${editingIndex === index ? 'bg-blue-900' : 'bg-gray-800'
                                 }`}
                             key={index}
                         >
                             <li className='text-white'>{task}</li>
                             <div className='btns gap-2 flex'>
+                                <input type="checkbox" className='w-10 outline-none' onClick={() => handleCompletedTask(e)} />
                                 <button
                                     type="button"
                                     className='border border-green-300 p-2 rounded'
@@ -164,7 +171,7 @@ const Todo = () => {
                             </div>
                         </div>
                     ))
-                )}
+                }
             </ul>
         </div>
     )
