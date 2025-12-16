@@ -7,7 +7,7 @@ const Todo = () => {
     const [todo, setTodo] = useState("");
     const [todos, setTodos] = useState([]);
     const [editingIndex, setEditingIndex] = useState(null);
-    const [isMarked, setMarked] = useState(false);
+    // const [isMarked, setMarked] = useState(false);
 
     // Load todos from localStorage when component mounts
     useEffect(() => {
@@ -41,7 +41,11 @@ const Todo = () => {
             setTodos(updatedTodos);
             setEditingIndex(null);
         } else {
-            setTodos((prev) => [...prev, todo]);
+            setTodos(prev => [
+                ...prev,
+                { text: todo, completed: false }
+            ]);
+
         }
 
         setTodo("");
@@ -66,9 +70,17 @@ const Todo = () => {
         setEditingIndex(indexToEdit);
     }
 
+    // Handle completed task
     const handleCompletedTask = (indexMarked) => {
-      
-    }
+        setTodos(prevTodos =>
+            prevTodos.map((task, index) =>
+                index === indexMarked
+                    ? { ...task, completed: !task.completed }
+                    : task
+            )
+        );
+    };
+
     //  Speech handling (Speech to text )
     const handleSpeech = () => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -147,13 +159,19 @@ const Todo = () => {
                         {
                             todos.map((task, index) => (
                                 <div
-                                    className={`todo-item flex justify-between items-center p-4 mb-2${task.completed ? "completed" : ""}  ${editingIndex === index ? 'bg-blue-900' : 'bg-gray-800'
-                                        }`}
+                                    className={`todo-item flex justify-between items-center p-4 mb-2  ${editingIndex === index ? 'bg-blue-900' : 'bg-gray-800'
+                                        } ${task.completed ? "completed" : " "}`}
                                     key={index}
                                 >
-                                    <li className='text-white'>{task}</li>
+                                    <li className='text-white'>{task.text}</li>
                                     <div className='btns gap-2 flex'>
-                                        <input type="checkbox" className='w-10 outline-none' onChange={() => handleCompletedTask(index)} />
+                                        <button
+                                            type="button"
+                                            className="border border-blue-300 p-2 rounded "
+                                            onClick={() => handleCompletedTask(index)}
+                                        >
+                                            Mark as Complete
+                                        </button>
                                         <button
                                             type="button"
                                             className='border border-green-300 p-2 rounded'
