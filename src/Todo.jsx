@@ -33,7 +33,7 @@ const Todo = () => {
         e.preventDefault();
 
         if (todo.trim() === "") return;
-
+        // checking the editing index 
         if (editingIndex !== null) {
             const updatedTodos = todos.map((task, index) =>
                 index === editingIndex
@@ -43,6 +43,7 @@ const Todo = () => {
             setTodos(updatedTodos);
             setEditingIndex(null);
         } else {
+            // adding the new task 
             setTodos(prev => [
                 ...prev,
                 { text: todo, completed: false }
@@ -130,7 +131,7 @@ const Todo = () => {
                                 type="button"
                                 onClick={handleSpeech}
                                 className="mic-button absolute right-0 top-0 h-full px-3 flex items-center justify-center 
-                 border-l border-white bg-transparent cursor-pointer"
+                 border-l border-white bg-transparent cursor-pointer hover:scale-[0.9] ease-in"
                             >
                                 <FaMicrophone className="text-zinc-100 opacity-80" />
                             </button>
@@ -139,7 +140,7 @@ const Todo = () => {
                         <div className="btns flex gap-3">
                             <button
                                 type="submit"
-                                className="outline-none cursor-pointer rounded p-2 w-20 ml-4 bg-green-800 
+                                className="add-task outline-none cursor-pointer rounded p-2 w-20 ml-4 bg-green-800 
                  hover:scale-[0.9] ease-in-out"
                             >
                                 {editingIndex !== null ? "Update" : "Add Task"}
@@ -147,7 +148,7 @@ const Todo = () => {
 
                             <button
                                 type="button"
-                                className="outline-none rounded bg-red-800 p-2 w-20 hover:scale-[0.9] ease-in-out cursor-pointer"
+                                className="clear-task outline-none rounded bg-red-800 p-2 w-20 hover:scale-[0.9] ease-in-out cursor-pointer"
                                 onClick={() => {
                                     setTodo("");
                                     setEditingIndex(null);
@@ -171,21 +172,21 @@ const Todo = () => {
                                     <div className='btns gap-2 flex'>
                                         <button
                                             type="button"
-                                            className="border border-blue-300 p-2 rounded "
+                                            className="mark-completed border border-blue-300 p-2 rounded  hover:scale-[0.9] ease-in-out hover:bg-blue-400 hover:border-none"
                                             onClick={() => handleCompletedTask(index)}
                                         >
                                             Mark as Complete
                                         </button>
                                         <button
                                             type="button"
-                                            className='border border-green-300 p-2 rounded'
+                                            className='edit-task border border-green-300 p-2 rounded  hover:scale-[0.9] ease-in-out hover:bg-green-400 hover:border-none'
                                             onClick={() => handleEdit(index)}
                                         >
                                             Edit
                                         </button>
                                         <button
                                             type="button"
-                                            className='border border-red-300 p-2 rounded'
+                                            className='delete-task border border-red-300 p-2 rounded  hover:scale-[0.9] ease-in-out hover:bg-red-400 hover:border-none'
                                             onClick={() => handleDelete(index)}
                                         >
                                             Delete
