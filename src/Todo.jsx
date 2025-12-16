@@ -36,7 +36,9 @@ const Todo = () => {
 
         if (editingIndex !== null) {
             const updatedTodos = todos.map((task, index) =>
-                index === editingIndex ? todo : task
+                index === editingIndex
+                    ? { ...task, text: todo }
+                    : task
             );
             setTodos(updatedTodos);
             setEditingIndex(null);
@@ -64,9 +66,11 @@ const Todo = () => {
 
     // Updating the task 
     const handleEdit = (indexToEdit) => {
-        const taskToEdit = todos[indexToEdit]; // also can be done using array find method 
+        const taskToEdit = todos[indexToEdit];
+        // console.log(taskToEdit)
+        //  // also can be done using array find method 
         // const taskToEdit = todos.find((task, index) => index == indexToEdit)
-        setTodo(taskToEdit);
+        setTodo(taskToEdit.text);
         setEditingIndex(indexToEdit);
     }
 
