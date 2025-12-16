@@ -37,31 +37,34 @@ const Timer = () => {
     };
 
     return (
-        <div className="w-1/2 h-full flex justify-center items-center flex-col">
-            <div className="timer p-10 text-9xl font-mono">
-                {formatTime(timer)}
+        <div className="w-1/2 h-[500px] ">
+
+            <div className="timerContainer  m-2 flex items-center justify-center h-full flex-col">
+                <div className="timer p-10 text-9xl font-mono">
+                    {formatTime(timer)}
+                </div>
+                <div className="btn flex gap-4 p-10">
+                    <button
+                        className="outline-none p-2 w-20 rounded bg-green-800 hover:scale-90 transition-transform ease-in-out cursor-pointer text-white"
+                        onClick={handleStart}
+                    >
+                        Start
+                    </button>
+                    <button
+                        className="outline-none p-2 w-20 rounded bg-red-800 hover:scale-90 transition-transform ease-in-out cursor-pointer text-white"
+                        onClick={handlePause}
+                    >
+                        Pause
+                    </button>
+                    <button
+                        className="outline-none p-2 w-20 rounded bg-blue-800 hover:scale-90 transition-transform ease-in-out cursor-pointer text-white"
+                        onClick={handleReset}
+                    >
+                        Reset
+                    </button>
+                </div>
             </div>
 
-            <div className="btn flex gap-4 p-10">
-                <button 
-                    className="outline-none p-2 w-20 rounded bg-green-800 hover:scale-90 transition-transform ease-in-out cursor-pointer text-white" 
-                    onClick={handleStart}
-                >
-                    Start
-                </button>
-                <button 
-                    className="outline-none p-2 w-20 rounded bg-red-800 hover:scale-90 transition-transform ease-in-out cursor-pointer text-white" 
-                    onClick={handlePause}
-                >
-                    Pause
-                </button>
-                <button 
-                    className="outline-none p-2 w-20 rounded bg-blue-800 hover:scale-90 transition-transform ease-in-out cursor-pointer text-white" 
-                    onClick={handleReset}
-                >
-                    Reset
-                </button>
-            </div>
         </div>
     );
 };
