@@ -112,12 +112,12 @@ const Todo = () => {
     };
 
     return (
-        <div className="todo-Container w-1/2  px-4" >
+        <div className="todo-Container w-1/2  px-4 max-md:w-full" >
             <div className="todo flex flex-col h-full gap-2">
                 <div className="form-container">
                     <form onSubmit={handleSubmit} className=" w-full p-2 flex gap-4">
 
-                        <div className="relative w-2/3">
+                        <div className="relative w-2/3 max-md:w-screen">
                             <input
                                 type="text"
                                 placeholder="Enter task"

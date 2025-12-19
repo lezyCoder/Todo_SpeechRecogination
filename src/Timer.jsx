@@ -38,8 +38,7 @@ const Timer = () => {
 
     return (
         <div className="w-1/2 h-[500px] ">
-
-            <div className="timerContainer  m-2 flex items-center justify-center h-full flex-col">
+            <div className="timerContainer  m-2 flex items-center justify-center h-full flex-col max-md:hidden">
                 <div className="timer p-10 text-9xl font-mono">
                     {formatTime(timer)}
                 </div>
